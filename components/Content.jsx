@@ -10,6 +10,23 @@ const contentVariant = {
     x: 0,
     transition: {
       duration: 0.5,
+      staggerChildren: 0.1,
+    },
+  },
+}
+
+
+const mobileVariant = {
+  initial: {
+    opacity: 0,
+    y: 300,
+  },
+  animate: {
+    opacity: 1,
+    y: 0,
+    transition: {
+      duration: 0.5,
+      staggerChildren: 0.1,
     },
   },
 }
@@ -42,7 +59,7 @@ export default function Content({ block, time }) {
     <motion.div
       initial="initial"
       animate="animate"
-      variants={contentVariant}
+      variants={window.innerWidth >= 1000 ? contentVariant : mobileVariant}
       className="min-h-screen w-full bg-black bg-opacity-80 bg-bg bg-cover bg-center text-center text-themeblue"
     >
       <div className="lg:hidden">
@@ -64,32 +81,32 @@ export default function Content({ block, time }) {
         <h1 className="pt-20 text-5xl font-thin">KLC control center</h1>
 
         <div className=" px-4 pt-28 text-center">
-          <div className="pb-8 ">
+          <motion.div className="pb-8 ">
             <h1 className="pb-4 text-white">Validators</h1>
             <h2 className="font-extralight">11</h2>
-          </div>
-          <div className="py-8 ">
+          </motion.div>
+          <motion.div className="py-8 ">
             <h1 className="text-white">Last block</h1>
             <h2 className="font-extralight">
               {block.number ? block.number : '--'}
             </h2>
-          </div>{' '}
-          <div className="py-8 ">
+          </motion.div>{' '}
+          <motion.div className="py-8 ">
             <h1 className="text-white">Last block time</h1>
             <h2 className="font-extralight">{time ? time : '--'} s</h2>
-          </div>{' '}
-          <div className="py-8 ">
+          </motion.div>{' '}
+          <motion.div className="py-8 ">
             <h1 className="text-white">Last validator</h1>
             <h2 className="break-all font-extralight">
               {block.miner ? block.miner : '--'}
             </h2>
-          </div>{' '}
-          <div className="py-8 pl-20">
+          </motion.div>{' '}
+          <motion.div className="py-8 pl-20">
             <h1 className="text-white">Last block weight</h1>
             <h2 className="font-extralight">
               {block.size ? block.size - 1521 : '--'} bytes
             </h2>
-          </div>
+          </motion.div>
         </div>
       </div>
 
@@ -120,7 +137,7 @@ export default function Content({ block, time }) {
             <motion.h3
               onClick={add}
               className="hover:cursor-pointer"
-              whileHover={{ scale: 1.02, x: -5, color:"white"}}
+              whileHover={{ scale: 1.02, x: -5, color: 'white' }}
             >
               Add klc to your wallet
             </motion.h3>
