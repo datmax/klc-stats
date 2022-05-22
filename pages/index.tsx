@@ -53,6 +53,8 @@ const Home: NextPage = () => {
     <div className="flex min-h-screen flex-col items-center justify-center bg-black  text-themeblue">
       <Head>
         <title>KLC stats</title>
+        <meta name="description" content="Join the revolution." />
+
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <AnimatePresence exitBeforeEnter>
