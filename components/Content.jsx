@@ -122,9 +122,9 @@ export default function Content({ block, time }) {
         <motion.div
           initial={{ backgroundColor: 'rgba(0, 0, 0, 0)' }}
           animate={{
-            backgroundColor: ['rgba(0, 0, 0, 0.7)', 'rgba(0, 0, 0, 0)'],
+            backgroundColor: ['rgba(0, 0, 0, 0.6)', 'rgba(0, 0, 0, 0)'],
             transition: {
-              duration: 2,
+              duration: 3,
               repeat: Infinity,
               repeatType: 'reverse',
               restSpeed: 1,
