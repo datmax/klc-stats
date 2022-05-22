@@ -8,11 +8,17 @@ import { motion, AnimatePresence } from 'framer-motion'
 import { ethers } from 'ethers'
 var Web3 = require('web3')
 
+const bgStyle = []
+
+
 const Home: NextPage = () => {
   const [showOpening, setShowOpening] = useState(true)
   const [showContent, setShowContent] = useState(false)
   const [block, setblock] = useState({})
   const [time, setTime] = useState(0)
+
+
+
 
   const getData = async () => {
     const web3 = new Web3('https://www.klc.live/')
@@ -50,7 +56,7 @@ const Home: NextPage = () => {
   }, [showOpening])
 
   return (
-    <div className="flex min-h-screen items-center justify-center bg-black text-themeblue  lg:flex-col">
+    <div className="flex min-h-screen items-center justify-center  bg-black text-themeblue  lg:flex-col">
       <Head>
         <title>KLC stats</title>
         <meta name="description" content="Join the revolution." />

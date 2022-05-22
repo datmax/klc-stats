@@ -25,7 +25,7 @@ export default function Opening() {
       animate="animate"
       exit="exit"
       variants={openingVariant}
-      className="flex w-full flex-1 flex-col items-center justify-center text-center text-7xl  font-thin"
+      className="flex w-full flex-1 flex-col items-center justify-center text-center text-7xl font-thin"
     >
       KAIBA LIGHTNING CHAIN
     </motion.main>
