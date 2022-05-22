@@ -1,5 +1,5 @@
-import { motion } from 'framer-motion'
-
+import { motion, AnimatePresence } from 'framer-motion'
+import { useState, useEffect } from 'react'
 const contentVariant = {
   initial: {
     opacity: 0,
@@ -13,8 +13,34 @@ const contentVariant = {
       staggerChildren: 0.1,
     },
   },
+  exit: {
+    opacity: 0,
+    y: 200,
+  },
 }
 
+const letterVariant = {
+  animate: {
+    opacity: 1,
+    scale: [1.05, 1],
+    x: [-5, 0],
+    transition: {
+      duration: 0.3,
+      staggerChildren: 0.05,
+    },
+  },
+  initial: {
+    scale: 0,
+    opacity: 0,
+  },
+  exit: {
+    opacity: 0,
+
+    transition: {
+      duration: 0.4,
+    },
+  },
+}
 
 const mobileVariant = {
   initial: {
@@ -29,6 +55,28 @@ const mobileVariant = {
       staggerChildren: 0.1,
     },
   },
+}
+
+function AnimatedText({ text }) {
+  const split = (text + '').split('')
+  return (
+    <motion.h2
+      variants={letterVariant}
+      initial="initial"
+      animate="animate"
+      exit="exit"
+      key={text}
+      className="font-extralight"
+    >
+      {split
+        ? split.map((el) => (
+            <motion.span key={el} variants={letterVariant}>
+              {el}
+            </motion.span>
+          ))
+        : '--'}
+    </motion.h2>
+  )
 }
 
 export default function Content({ block, time }) {
@@ -88,7 +136,12 @@ export default function Content({ block, time }) {
           <motion.div className="py-8 ">
             <h1 className="text-white">Last block</h1>
             <h2 className="font-extralight">
-              {block.number ? block.number : '--'}
+              <AnimatePresence exitBeforeEnter>
+                <AnimatedText
+                  text={block.number}
+                  key={block.number}
+                ></AnimatedText>
+              </AnimatePresence>
             </h2>
           </motion.div>{' '}
           <motion.div className="py-8 ">
@@ -98,7 +151,12 @@ export default function Content({ block, time }) {
           <motion.div className="py-8 ">
             <h1 className="text-white">Last validator</h1>
             <h2 className="break-all font-extralight">
-              {block.miner ? block.miner : '--'}
+              <AnimatePresence exitBeforeEnter>
+                <AnimatedText
+                  text={block.miner}
+                  key={block.miner}
+                ></AnimatedText>
+              </AnimatePresence>
             </h2>
           </motion.div>{' '}
           <motion.div className="py-8">
@@ -149,9 +207,12 @@ export default function Content({ block, time }) {
             </div>
             <div className="py-8 pl-40">
               <h1 className="text-white">Last block</h1>
-              <h2 className="font-extralight">
-                {block.number ? block.number : '--'}
-              </h2>
+              <AnimatePresence exitBeforeEnter>
+                <AnimatedText
+                  text={block.number}
+                  key={block.number}
+                ></AnimatedText>
+              </AnimatePresence>
             </div>{' '}
             <div className="py-8 pl-32">
               <h1 className="text-white">Last block time</h1>
@@ -160,7 +221,12 @@ export default function Content({ block, time }) {
             <div className="py-8 pl-20">
               <h1 className="text-white">Last validator</h1>
               <h2 className="font-extralight">
-                {block.miner ? block.miner : '--'}
+                <AnimatePresence exitBeforeEnter>
+                  <AnimatedText
+                    text={block.miner}
+                    key={block.miner}
+                  ></AnimatedText>
+                </AnimatePresence>
               </h2>
             </div>{' '}
             <div className="py-8 pl-20">

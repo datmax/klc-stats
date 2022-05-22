@@ -36,7 +36,7 @@ const Home: NextPage = () => {
 
     setInterval(() => {
       getData()
-    }, 30 * 1000)
+    }, 7 * 1000)
 
     setTimeout(() => {
       setShowOpening(false)
@@ -50,7 +50,7 @@ const Home: NextPage = () => {
   }, [showOpening])
 
   return (
-    <div className="flex min-h-screen flex-col items-center justify-center bg-black  text-themeblue">
+    <div className="flex min-h-screen items-center justify-center bg-black text-themeblue  lg:flex-col">
       <Head>
         <title>KLC stats</title>
         <meta name="description" content="Join the revolution." />
