@@ -76,13 +76,11 @@ function AnimatedText({ text }) {
       key={text}
       className="font-extralight"
     >
-      {split
-        ? split.map((el, index) => (
-            <motion.span key={index} variants={letterVariant}>
-              {el}
-            </motion.span>
-          ))
-        : '--'}
+      {split.map((el, index) => (
+        <motion.span key={index} variants={letterVariant}>
+          {el}
+        </motion.span>
+      ))}
     </motion.h2>
   )
 }
