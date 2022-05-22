@@ -9,7 +9,7 @@ module.exports = {
         themeblue: "#08D4B0"
       },
       backgroundImage:{
-        bg : "url('/kaibabg.png')",
+        bg : "url('/kaibabg.webp')",
       } 
     },
   },
