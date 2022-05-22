@@ -4,7 +4,14 @@ module.exports = {
     './components/**/*.{js,ts,jsx,tsx}',
   ],
   theme: {
-    extend: {},
+    extend: {
+      colors:{
+        themeblue: "#08D4B0"
+      },
+      backgroundImage:{
+        bg : "url('/kaibabg.png')",
+      } 
+    },
   },
   plugins: [],
 }
