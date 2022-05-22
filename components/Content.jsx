@@ -101,7 +101,7 @@ export default function Content({ block, time }) {
               {block.miner ? block.miner : '--'}
             </h2>
           </motion.div>{' '}
-          <motion.div className="py-8 pl-20">
+          <motion.div className="py-8">
             <h1 className="text-white">Last block weight</h1>
             <h2 className="font-extralight">
               {block.size ? block.size - 1521 : '--'} bytes

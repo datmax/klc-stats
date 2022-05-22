@@ -19,3 +19,8 @@
     @apply text-lg;
   }
 }
+
+
+*{
+  overflow-x: hidden;
+}
