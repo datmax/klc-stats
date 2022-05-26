@@ -201,8 +201,14 @@ export default function Content({ block, time, daoData }) {
                   Add klc to your wallet
                 </motion.h3>
               </div>
-              {dao && <MobileDaoData daoData={daoData}></MobileDaoData>}
-              {!dao && <MobileData block={block} time={time}></MobileData>}
+              <AnimatePresence exitBeforeEnter>
+                {dao && (
+                  <MobileDaoData daoData={daoData} key="1"></MobileDaoData>
+                )}
+                {!dao && (
+                  <MobileData block={block} time={time} key="2"></MobileData>
+                )}
+              </AnimatePresence>
             </div>
           </div>
         </motion.div>

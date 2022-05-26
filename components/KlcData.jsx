@@ -59,7 +59,13 @@ const mobileVariant = {
 }
 export function LgData({ block, time }) {
   return (
-    <div className=" px-4 pt-28 text-center">
+    <motion.div
+      initial="initial"
+      variants={letterVariant}
+      animate="animate"
+      exit="exit"
+      className=" px-4 pt-28 text-center"
+    >
       <motion.div className="pb-8 ">
         <h1 className="pb-4 text-white">Validators</h1>
         <h2 className="font-extralight">11</h2>
@@ -90,7 +96,7 @@ export function LgData({ block, time }) {
           {block.size ? block.size - 1521 : '--'} bytes
         </h2>
       </motion.div>
-    </div>
+    </motion.div>
   )
 }
 

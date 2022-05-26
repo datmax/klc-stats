@@ -96,32 +96,46 @@ export function LgDaoData({ daoData }) {
 
 export function MobileDaoData({ daoData }) {
   return (
-    <div className=" pt-20 text-left">
-      <div className="pb-8 lg:pl-40 px-8">
+    <motion.div
+      variants={letterVariant}
+      initial="initial"
+      exit="exit"
+      animate="animate"
+      className=" pt-20 text-left"
+    >
+      <div className="px-8 pb-8 lg:pl-40">
         <h1 className="pb-2 text-sm text-white">Total shares</h1>
         <div className="grid grid-cols-2">
-          <h1 className="text-4xl text-left font-extralight text-themeblue mb-4">
+          <h1 className="mb-4 text-left text-4xl font-extralight text-themeblue">
             {daoData['Total scores']}
           </h1>
-          <h2 className='text-right text-white'>
-              Shares
-          </h2>
+          <h2 className="text-right text-white">Shares</h2>
         </div>
         {daoData && (
           <div>
             {Object.keys(daoData['DAO Informations']['validators']).map(
               (val) => {
                 return (
-                  <div className="grid grid-cols-2 py-2">
+                  <motion.div
+                    variants={letterVariant}
+                    className="grid grid-cols-2 py-2"
+                  >
                     <div className="text-white">
                       {val.slice(0, 4) +
                         '...' +
                         val.slice(val.length - 4, val.length)}
                     </div>
                     <div className="text-right font-extralight text-themeblue">
-                      {daoData['DAO Informations']['validators'][val].score}
+                      {daoData['DAO Informations']['validators'][val].score}{' '}
+                      <span className="text-themewhite">|</span>{' '}
+                      {(
+                        daoData['DAO Informations']['validators'][val].score /
+                        daoData['Total scores']
+                      ).toFixed(2) *
+                        100 +
+                        '%'}
                     </div>
-                  </div>
+                  </motion.div>
                 )
               }
             )}
@@ -129,6 +143,6 @@ export function MobileDaoData({ daoData }) {
         )}
       </div>
       <div className="py-8 pl-40"></div>
-    </div>
+    </motion.div>
   )
 }
