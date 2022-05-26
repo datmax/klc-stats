@@ -1,5 +1,8 @@
 import { motion, AnimatePresence, animate } from 'framer-motion'
 import { useState, useEffect } from 'react'
+import { LgData, MobileData } from './KlcData'
+import { LgDaoData, MobileDaoData } from './DaoData'
+import AnimatedText from './AnimatedText'
 
 const bgStyles = [
   'min-h-screen w-full bg-gradient-to-tr from-violet-800/30 via-black/20 to-black/20 bg-opacity-20',
@@ -65,27 +68,9 @@ const mobileVariant = {
   },
 }
 
-function AnimatedText({ text }) {
-  const split = (text + '').split('')
-  return (
-    <motion.h2
-      variants={letterVariant}
-      initial="initial"
-      animate="animate"
-      exit="exit"
-      key={text}
-      className="font-extralight"
-    >
-      {split.map((el, index) => (
-        <motion.span key={index} variants={letterVariant}>
-          {el}
-        </motion.span>
-      ))}
-    </motion.h2>
-  )
-}
+export default function Content({ block, time, daoData }) {
+  const [dao, setDao] = useState(false)
 
-export default function Content({ block, time }) {
   const add = () => {
     window.ethereum
       .request({
@@ -113,7 +98,7 @@ export default function Content({ block, time }) {
     <motion.div
       initial="initial"
       animate="animate"
-      variants={window.innerWidth >= 1000 ? contentVariant : mobileVariant}
+      variants={contentVariant}
       className="saturate-1000 min-h-screen  w-full bg-opacity-80  bg-bg bg-cover bg-center text-center text-themeblue"
     >
       <div className="min-h-screen w-full bg-opacity-20 bg-gradient-to-tr from-violet-800/30 via-black/20 to-black/20">
@@ -145,51 +130,48 @@ export default function Content({ block, time }) {
                 </h3>
               </div>
             </div>
-            <h1 className="pt-20 text-5xl font-thin">KLC control center</h1>
-
-            <div className=" px-4 pt-28 text-center">
-              <motion.div className="pb-8 ">
-                <h1 className="pb-4 text-white">Validators</h1>
-                <h2 className="font-extralight">11</h2>
-              </motion.div>
-              <motion.div className="py-8 ">
-                <h1 className="text-white">Last block</h1>
-                <h2 className="font-extralight">
-                  <AnimatePresence exitBeforeEnter>
-                    <AnimatedText
-                      text={block.number}
-                      key={block.number}
-                    ></AnimatedText>
-                  </AnimatePresence>
-                </h2>
-              </motion.div>{' '}
-              <motion.div className="py-8 ">
-                <h1 className="text-white">Last block time</h1>
-                <h2 className="font-extralight">{time ? time : '--'} s</h2>
-              </motion.div>{' '}
-              <motion.div className="py-8 ">
-                <h1 className="text-white">Last validator</h1>
-                <h2 className="break-all font-extralight">
-                  <AnimatePresence exitBeforeEnter>
-                    <AnimatedText
-                      text={block.miner}
-                      key={block.miner}
-                    ></AnimatedText>
-                  </AnimatePresence>
-                </h2>
-              </motion.div>{' '}
-              <motion.div className="py-8">
-                <h1 className="text-white">Last block weight</h1>
-                <h2 className="font-extralight">
-                  {block.size ? block.size - 1521 : '--'} bytes
-                </h2>
-              </motion.div>
+            <div className="grid grid-cols-1">
+              <h1 className="pt-20 text-5xl font-thin text-white">
+                KLC control center
+              </h1>
+              <button
+                className="mx-2 font-thin text-white hover:underline active:outline-none"
+                onClick={() => setDao(false)}
+              >
+                KLC
+              </button>
+              <button
+                className="mx-2 font-thin text-white hover:underline active:outline-none"
+                onClick={() => setDao(true)}
+              >
+                DAO
+              </button>
             </div>
+            {!dao && <LgData block={block} time={time}></LgData>}
+            {dao && <MobileDaoData daoData={daoData}></MobileDaoData>}
           </div>
 
-          <div className=" hidden min-h-screen w-full flex-row lg:flex lg:max-w-7xl">
+          <div className=" hidden min-h-screen w-full flex-row  lg:flex lg:max-w-7xl">
             <div className=" flex min-h-screen w-full basis-1/2 items-center justify-center  ">
-              <p className="px-20 text-7xl font-thin">KLC control center</p>
+              <div className="grid grid-cols-1">
+                <p className="w-full px-20 text-7xl font-thin">
+                  KLC control center
+                </p>
+                <div className="mt-4 ">
+                  <button
+                    className="mx-2 font-thin text-white hover:underline active:outline-none"
+                    onClick={() => setDao(false)}
+                  >
+                    KLC
+                  </button>
+                  <button
+                    className="mx-2 font-thin text-white hover:underline active:outline-none"
+                    onClick={() => setDao(true)}
+                  >
+                    DAO
+                  </button>
+                </div>
+              </div>
               <svg
                 width="151"
                 height="954"
@@ -219,42 +201,8 @@ export default function Content({ block, time }) {
                   Add klc to your wallet
                 </motion.h3>
               </div>
-              <div className=" pt-28 text-left">
-                <div className="pb-8 pl-40">
-                  <h1 className="pb-4 text-white">Validators</h1>
-                  <h2 className="font-extralight">11</h2>
-                </div>
-                <div className="py-8 pl-40">
-                  <h1 className="text-white">Last block</h1>
-                  <AnimatePresence exitBeforeEnter>
-                    <AnimatedText
-                      text={block.number}
-                      key={block.number}
-                    ></AnimatedText>
-                  </AnimatePresence>
-                </div>{' '}
-                <div className="py-8 pl-32">
-                  <h1 className="text-white">Last block time</h1>
-                  <h2 className="font-extralight">{time ? time : '--'} s</h2>
-                </div>{' '}
-                <div className="py-8 pl-20">
-                  <h1 className="text-white">Last validator</h1>
-                  <h2 className="font-extralight">
-                    <AnimatePresence exitBeforeEnter>
-                      <AnimatedText
-                        text={block.miner}
-                        key={block.miner}
-                      ></AnimatedText>
-                    </AnimatePresence>
-                  </h2>
-                </div>{' '}
-                <div className="py-8 pl-20">
-                  <h1 className="text-white">Last block weight</h1>
-                  <h2 className="font-extralight">
-                    {block.size ? block.size - 1521 : '--'} bytes
-                  </h2>
-                </div>
-              </div>
+              {dao && <MobileDaoData daoData={daoData}></MobileDaoData>}
+              {!dao && <MobileData block={block} time={time}></MobileData>}
             </div>
           </div>
         </motion.div>

@@ -21,8 +21,10 @@
 }
 
 html,
-body {
+body,
+#__next {
   overflow-x: hidden;
+  overflow-y: hidden;
   scroll-behavior: smooth;
 }
 

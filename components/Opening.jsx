@@ -10,8 +10,6 @@ const openingVariant = {
   },
   exit: {
     opacity: 0,
-    scale: 0.8,
-    x:-300,
     transition: {
       duration: 0.3,
     },
@@ -25,7 +23,7 @@ export default function Opening() {
       animate="animate"
       exit="exit"
       variants={openingVariant}
-      className="flex w-full flex-1 flex-col items-center justify-center text-center text-7xl font-thin"
+      className="flex w-full flex-1 flex-col items-center justify-center text-center text-7xl font-thin text-white"
     >
       KAIBA LIGHTNING CHAIN
     </motion.main>

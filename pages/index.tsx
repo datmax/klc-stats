@@ -10,19 +10,20 @@ var Web3 = require('web3')
 
 const bgStyle = []
 
-
 const Home: NextPage = () => {
   const [showOpening, setShowOpening] = useState(true)
   const [showContent, setShowContent] = useState(false)
   const [block, setblock] = useState({})
   const [time, setTime] = useState(0)
-
-
-
-
+  const [daoData, setDaoData] = useState()
+  const [daoShares, setDaoShares] = useState(0)
   const getData = async () => {
     const web3 = new Web3('https://www.klc.live/')
     try {
+      const jsonDaoData = await fetch('https://dao.klc.live:1111/dao')
+      const parsedDaoDAta = await jsonDaoData.json()
+      console.log(parsedDaoDAta)
+      setDaoData(parsedDaoDAta)
       const current = await web3.eth.getBlock('latest')
       console.log(current.size)
       const previous = await web3.eth.getBlock(current.number - 1)
@@ -39,7 +40,6 @@ const Home: NextPage = () => {
 
   useEffect(() => {
     getData()
-
     setInterval(() => {
       getData()
     }, 7 * 1000)
@@ -60,13 +60,21 @@ const Home: NextPage = () => {
       <Head>
         <title>KLC stats</title>
         <meta name="description" content="Join the revolution." />
-
+        <meta
+          name="viewport"
+          content="width=device-width, initial-scale=1"
+        ></meta>
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <AnimatePresence exitBeforeEnter>
         {showOpening && <Opening key="opening"></Opening>}
         {showContent && (
-          <Content key="content" block={block} time={time}></Content>
+          <Content
+            key="content"
+            block={block}
+            time={time}
+            daoData={daoData}
+          ></Content>
         )}
       </AnimatePresence>
     </div>
