@@ -77,7 +77,7 @@ export default function Content({ block, time, daoData }) {
         method: 'wallet_addEthereumChain',
         params: [
           {
-            chainId: '0x2D',
+            chainId: '0x68',
             chainName: 'KLC Testnet',
             nativeCurrency: {
               name: 'Kaiba DeFi',
