@@ -25,7 +25,7 @@ export default function Opening() {
       variants={openingVariant}
       className="flex w-full flex-1 flex-col items-center justify-center text-center text-7xl font-thin text-white"
     >
-      KAIBA LIGHTNING CHAIN
+      KAIBA • LIGHTNING • CHAIN - TESTNET
     </motion.main>
   )
 }

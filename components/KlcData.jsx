@@ -128,7 +128,7 @@ export function MobileData({ block, time }) {
       <div className="py-8 pl-20">
         <h1 className="text-white">Last block weight</h1>
         <h2 className="font-extralight">
-          {block.size ? block.size - 1521 : '--'} bytes
+          {block.size ? block.size - 840 : '--'} bytes
         </h2>
       </div>
     </div>
